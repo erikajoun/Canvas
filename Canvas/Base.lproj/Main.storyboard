@@ -113,12 +113,36 @@
                         <action selector="didPanTray:" destination="BYZ-38-t0r" id="HzO-I4-jRK"/>
                     </connections>
                 </panGestureRecognizer>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="HgS-5W-qI3"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="EAq-Zq-gMp"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="b7D-Ee-DkR"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="uyv-Mw-YGy"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="kBS-xR-9ZG"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="ctd-G7-EO3"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="HgS-5W-qI3">
+                    <connections>
+                        <action selector="didPanFace:" destination="BYZ-38-t0r" id="siz-wg-O8q"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="EAq-Zq-gMp">
+                    <connections>
+                        <action selector="didPanFace:" destination="BYZ-38-t0r" id="NT0-gm-WHP"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="b7D-Ee-DkR">
+                    <connections>
+                        <action selector="didPanFace:" destination="BYZ-38-t0r" id="t2X-88-8in"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="uyv-Mw-YGy">
+                    <connections>
+                        <action selector="didPanFace:" destination="BYZ-38-t0r" id="921-Ii-JdN"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="kBS-xR-9ZG">
+                    <connections>
+                        <action selector="didPanFace:" destination="BYZ-38-t0r" id="IOh-Fa-3x3"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="ctd-G7-EO3">
+                    <connections>
+                        <action selector="didPanFace:" destination="BYZ-38-t0r" id="bNi-yH-o2T"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="118.29085457271366"/>
         </scene>
