@@ -20,6 +20,11 @@ class CanvasViewController: UIViewController {
       newlyCreatedFace.center = imageView.center
       newlyCreatedFace.center.y += trayView.frame.origin.y
       newlyCreatedFaceOriginalCenter = newlyCreatedFace.center
+      
+      // Programmatically add gesture recognizer to new face
+      let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPanEmoji(sender:)))
+      newlyCreatedFace.addGestureRecognizer(panGestureRecognizer)
+      newlyCreatedFace.isUserInteractionEnabled = true
     }
     
     let translation = sender.translation(in: view)
@@ -38,9 +43,9 @@ class CanvasViewController: UIViewController {
   var trayDownOffset: CGFloat!
   var trayUp: CGPoint!
   var trayDown: CGPoint!
+  var trayOriginalCenter: CGPoint!
   
   @IBAction func didPanTray(_ sender: UIPanGestureRecognizer) {
-    var trayOriginalCenter: CGPoint!
     let velocity = sender.velocity(in: view)
     
     let translation = sender.translation(in: view)
@@ -67,7 +72,21 @@ class CanvasViewController: UIViewController {
         }, completion: nil)
       }
     }
+  }
+  
+  @IBAction func didPanEmoji(sender: UIPanGestureRecognizer) {
+    let translation = sender.translation(in: view)
     
+    if sender.state == .began {
+      newlyCreatedFace = sender.view as! UIImageView // to get the face that we panned on.
+      newlyCreatedFaceOriginalCenter = newlyCreatedFace.center // so we can offset by translation later.
+
+    } else if sender.state == .changed {
+      newlyCreatedFace.center = CGPoint(x: newlyCreatedFaceOriginalCenter.x + translation.x, y: newlyCreatedFaceOriginalCenter.y + translation.y)
+
+    } else if sender.state == .ended {
+      
+    }
   }
   
   override func viewDidLoad() {
@@ -83,16 +102,4 @@ class CanvasViewController: UIViewController {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-  
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
