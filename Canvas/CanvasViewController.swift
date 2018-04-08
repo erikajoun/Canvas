@@ -9,33 +9,31 @@
 import UIKit
 
 class CanvasViewController: UIViewController {
+  var newlyCreatedFace: UIImageView!
+  var newlyCreatedFaceOriginalCenter: CGPoint!
   
   @IBAction func didPanFace(_ sender: UIPanGestureRecognizer) {
-    /* var newlyCreatedFace: UIImageView!
-     var newlyCreatedFaceOriginalCenter: CGPoint!
-     
-     if(sender.state == .began) {
-     var imageView = sender.view as! UIImageView
-     newlyCreatedFace = UIImageView(image: imageView.image)
-     view.addSubview(newlyCreatedFace)
-     newlyCreatedFace.center = imageView.center
-     newlyCreatedFace.center.y += trayView.frame.origin.y
-     newlyCreatedFaceOriginalCenter = newlyCreatedFace.center
-     }
-     
-     let translation = sender.translation(in: view)
-     
-     if(sender.state == .changed) {
-     newlyCreatedFace.center = CGPoint(x: newlyCreatedFaceOriginalCenter.x + translation.x, y: newlyCreatedFaceOriginalCenter.y + translation.y)
-     }
-     
-     if(sender.state == .ended) {
-     
-     }*/
+    if(sender.state == .began) {
+      var imageView = sender.view as! UIImageView
+      newlyCreatedFace = UIImageView(image: imageView.image)
+      view.addSubview(newlyCreatedFace)
+      newlyCreatedFace.center = imageView.center
+      newlyCreatedFace.center.y += trayView.frame.origin.y
+      newlyCreatedFaceOriginalCenter = newlyCreatedFace.center
+    }
+    
+    let translation = sender.translation(in: view)
+    
+    if(sender.state == .changed) {
+      newlyCreatedFace.center = CGPoint(x: newlyCreatedFaceOriginalCenter.x + translation.x, y: newlyCreatedFaceOriginalCenter.y + translation.y)
+    }
+    
+    if(sender.state == .ended) {
+      
+    }
   }
   
   @IBOutlet weak var trayView: UIView!
-  var newlyCreatedFace: UIImageView!
   
   var trayDownOffset: CGFloat!
   var trayUp: CGPoint!
