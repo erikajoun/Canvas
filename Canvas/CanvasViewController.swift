@@ -11,42 +11,39 @@ import UIKit
 class CanvasViewController: UIViewController {
   
   @IBAction func didPanFace(_ sender: UIPanGestureRecognizer) {
-    var newlyCreatedFace: UIImageView!
-    var newlyCreatedFaceOriginalCenter: CGPoint!
-    
-    if(sender.state == .began) {
-      var imageView = sender.view as! UIImageView
-      newlyCreatedFace = UIImageView(image: imageView.image)
-      view.addSubview(newlyCreatedFace)
-      newlyCreatedFace.center = imageView.center
-      newlyCreatedFace.center.y += trayView.frame.origin.y
-      newlyCreatedFaceOriginalCenter = newlyCreatedFace.center
-    }
-    
-    let translation = sender.translation(in: view)
-    
-    if(sender.state == .changed) {
-      newlyCreatedFace.center = CGPoint(x: newlyCreatedFaceOriginalCenter.x + translation.x, y: newlyCreatedFaceOriginalCenter.y + translation.y)
-    }
-    
-    if(sender.state == .ended) {
-      
-    }
+    /* var newlyCreatedFace: UIImageView!
+     var newlyCreatedFaceOriginalCenter: CGPoint!
+     
+     if(sender.state == .began) {
+     var imageView = sender.view as! UIImageView
+     newlyCreatedFace = UIImageView(image: imageView.image)
+     view.addSubview(newlyCreatedFace)
+     newlyCreatedFace.center = imageView.center
+     newlyCreatedFace.center.y += trayView.frame.origin.y
+     newlyCreatedFaceOriginalCenter = newlyCreatedFace.center
+     }
+     
+     let translation = sender.translation(in: view)
+     
+     if(sender.state == .changed) {
+     newlyCreatedFace.center = CGPoint(x: newlyCreatedFaceOriginalCenter.x + translation.x, y: newlyCreatedFaceOriginalCenter.y + translation.y)
+     }
+     
+     if(sender.state == .ended) {
+     
+     }*/
   }
   
   @IBOutlet weak var trayView: UIView!
   var newlyCreatedFace: UIImageView!
   
+  var trayDownOffset: CGFloat!
+  var trayUp: CGPoint!
+  var trayDown: CGPoint!
+  
   @IBAction func didPanTray(_ sender: UIPanGestureRecognizer) {
     var trayOriginalCenter: CGPoint!
     let velocity = sender.velocity(in: view)
-    let trayDownOffset: CGFloat!
-    var trayUp: CGPoint!
-    var trayDown: CGPoint!
-    
-    trayDownOffset = 160
-    trayUp = trayView.center // The initial position of the tray
-    trayDown = CGPoint(x: trayView.center.x ,y: trayView.center.y + trayDownOffset) // The position of the tray transposed down
     
     let translation = sender.translation(in: view)
     if(sender.state == .began) {
@@ -62,30 +59,33 @@ class CanvasViewController: UIViewController {
       if(velocity.y > 0) {  // Tray is moving down
         UIView.animate(withDuration:0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options:[] ,
                        animations: { () -> Void in
-                        self.trayView.center = trayDown
+                        self.trayView.center = self.trayDown
         }, completion: nil)
       }
       else if(velocity.y < 0){
         UIView.animate(withDuration:0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options:[] ,
                        animations: { () -> Void in
-                        self.trayView.center = trayUp
+                        self.trayView.center = self.trayUp
         }, completion: nil)
       }
     }
-  
+    
   }
   
   override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    super.viewDidLoad()
     
+    // Do any additional setup after loading the view.
+    trayDownOffset = 160
+    trayUp = trayView.center // The initial position of the tray
+    trayDown = CGPoint(x: trayView.center.x ,y: trayView.center.y + trayDownOffset) // The position of the tray transposed down
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
 
     /*
     // MARK: - Navigation
